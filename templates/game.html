@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>La Super Ultra Mansión Misteriosa</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #222; color: #eee; padding: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        header { text-align: center; margin-bottom: 20px; }
+        .log, .estado { background: #333; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .log p { margin: 5px 0; }
+        .comandos { background: #444; padding: 10px; border-radius: 5px; }
+        .comandos input[type="text"] { width: 70%; padding: 8px; border: none; border-radius: 3px; }
+        .comandos input[type="submit"] { padding: 8px 15px; border: none; border-radius: 3px; background: #66cc66; color: #222; cursor: pointer; }
+        .reiniciar { text-align: center; margin-top: 20px; }
+        a { color: #66ccff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mansión Misteriosa</h1>
+            <p>Explora, toma objetos y descubre los secretos de la mansión.</p>
+        </header>
+
+        <section class="estado">
+            <h2>Habitación actual: {{ current_room }}</h2>
+            <p>{{ room_description }}</p>
+            <p><strong>Salidas disponibles:</strong> 
+                {% for direction, room in exits.items() %}
+                    {{ direction }} ({{ room }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Objetos en la habitación:</strong>
+                {% if items %}
+                    {{ items | join(', ') }}
+                {% else %}
+                    Ninguno
+                {% endif %}
+            </p>
+            <p><strong>Tu inventario:</strong>
+                {% if inventory %}
+                    {{ inventory | join(', ') }}
+                {% else %}
+                    Vacío
+                {% endif %}
+            </p>
+        </section>
+
+        <section class="comandos">
+            <form method="post">
+                {{ form.hidden_tag() }}
+                {{ form.command(size=50, placeholder="Ej: mover norte, tomar linterna, inventario") }}
+                {{ form.submit() }}
+            </form>
+        </section>
+
+        <section class="log">
+            <h3>Historial de la aventura:</h3>
+            {% for entry in log %}
+                <p>{{ entry }}</p>
+            {% endfor %}
+        </section>
+
+        <div class="reiniciar">
+            <a href="{{ url_for('reiniciar') }}">Reiniciar juego</a>
+        </div>
+    </div>
+</body>
+</html>
