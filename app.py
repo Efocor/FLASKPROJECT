@@ -1,6 +1,7 @@
 #.....................................................................................
 # Código de prueba utilizando flask, 2025.
 # hecho por FECORO.
+# | Esta es una aplicación que genera un juego básico utilizando python y html |
 #.....................................................................................
 
 #.......................................... || STACK:
