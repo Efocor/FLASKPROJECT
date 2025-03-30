@@ -1,2 +1,2 @@
 # FLASKPROJECT
-Una prueba utilizando flask
+Una prueba utilizando flask para un experimento 
